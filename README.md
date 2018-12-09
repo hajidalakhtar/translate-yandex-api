@@ -1,3 +1,3 @@
 # translate-yandex-api
-use Vue.js
-https://hajidalakhtar.github.io/translate/
+use Vue.js <br>
+Link https://hajidalakhtar.github.io/translate/
