@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+<!-- ============================= Style ========================================= -->
+<style>
+  textarea{
+    border-radius: 10px;
+    width: 450px;
+    height:400px;
+    max-height: 400px;
+    min-height: 400px;
+  }
+  footer{
+    position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   color: white;
+}
+
+
+@media only screen and (max-width: 1000px) {
+  textarea{
+    border-radius: 10px;
+    width: 250px;
+    height:200px;
+    max-height: 200px;
+    min-height: 200px;
+  }
+  .rp{
+    margin-left: 2%;
+    margin-top: 25px;
+    border-radius: 10px;
+    width: 250px;
+    height:200px;
+    max-height: 200px;
+    min-height: 200px;
+  }
+  .rp-btn{
+    height: 50px;;
+  }
+}
+
+
+
+
+</style>
+<!-- ============================================================================== -->
+
+<!-- ==================================================BY Hajid Al akhtar============================================== -->
+  
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Translate</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarColor01">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="https://hajidalakhtar.github.io/">by hajid al akhtar <span class="sr-only">(current)</span></a>
+                </li>
+                
+              </ul>
+            
+            </div>
+          </nav>
+
+    <!-- ==================================================Akhir navbar============================================== -->
+
+
+    <div class="container">
+    <div class="row mt-5 ">
+      <div class="col-md-6 ">
+        <textarea type="text" v-model='cari' class="form-control" placeholder="Masukan Bahasa Indonesia">
+        </textarea>  
+       
+        </div>
+        <div class="col-md-6  bg-dark rp" style="height:400px;">
+            <div v-if="loading">
+                <p class="mt-1">Loading</p>
+            </div>
+            <div v-else>
+              <p class="text-white mt-1" >{{data}}</p>
+
+            </div>
+            
+        </div>
+        <button  v-on:click ='pesan' class="btn btn-primary mt-5 ml-3 rp-btn">Translate</button>
+
+    </div>
+
+    </div>
+  </div>
+  <br>
+  <br>
+  <footer class="bg-dark" >
+    <div class="footer">
+    <p class="">Web inih pake api dari <a href="https://yandex.com/" class="text-white"> yandex</a> </p>
+  </div>    
+  </footer>
+    
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script>
+  new Vue({
+    el:'#app',
+    data(){
+      return{
+        data:null,
+        cari:null,
+        loading: false
+      }
+    },
+    
+    methods: {
+    pesan() {
+      this.loading = true,
+      axios
+      .get('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20181205T160438Z.d9c1f2f3127956af.d38a8770c4ab879be96b8b480d22b85cd5be1ba5&text='+this.cari+'&lang=id-en')
+      .then(response => (
+        this.data = response.data.text[0]))
+        .finally(() => this.loading = false)
+      }
+    },
+  })
+
+</script>
+
+</html>
