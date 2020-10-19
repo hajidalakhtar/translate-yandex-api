@@ -22,5 +22,11 @@ npm run build
 npm run lint
 ```
 
+### Hacktoberfest
+```
+GB GB GB GB GB
+
+``
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
